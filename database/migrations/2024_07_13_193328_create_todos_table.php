@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->dateTime('deadline')->nullable();
-            $table->foreignId('assignee_id')->constrained('users')->nullable();
+            $table->foreignId('assignee_id')->nullable()->constrained('users');
             $table->integer('tag_id')->nullable();
             $table->boolean('completed')->default(false);
             $table->timestamps();
