@@ -8,7 +8,7 @@ use App\Models\Todo;
 class MyTasksController extends Controller
 {
     public function mytasks(Todo $todo){
-        return view('mytasks', ['todos' => $todo->get()]);
+        return view('mytasks', ['todos' => $todo->getCurrentUserTodos()]);
     } 
 
     public function updateStatus(Todo $todo){
