@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('todos', function (Blueprint $table) {
+        Schema::create('tags', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->dateTime('deadline')->nullable();
-            $table->foreignId('assignee_id')->nullable()->constrained('users');
-            $table->integer('tag_id')->nullable();
-            $table->boolean('completed')->default(false);
+            $table->string('colorcode');
             $table->timestamps();
         });
     }
@@ -27,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('todos');
+        Schema::dropIfExists('tags');
     }
 };
