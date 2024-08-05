@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MyTasksController;
+use App\Http\Controllers\TaskController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,9 +20,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/mytasks', [MyTasksController::class, 'mytasks'])->name('mytasks');
+Route::get('/mytasks', [TaskController::class, 'mytasks'])->name('mytasks');
 
-Route::post('/todos/{id}/update-status', [MyTasksController::class, 'updateStatus'])->name('todos.updateStatus');
+Route::post('/todos/{id}/update-status', [TaskController::class, 'updateStatus'])->name('todos.updateStatus');
+
+Route::get('/maketask', function () {
+    return view('maketask');
+})->name('maketask');
+
+Route::post('/tasks', [TaskController::class, 'store'])->name('tasks.store');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

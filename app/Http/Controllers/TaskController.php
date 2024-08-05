@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Todo;
 
-class MyTasksController extends Controller
+class TaskController extends Controller
 {
     public function mytasks(Todo $todo){
         return view('mytasks', ['todos' => $todo->getCurrentUserTodos()]);
@@ -17,6 +17,13 @@ class MyTasksController extends Controller
 
         return response()->json(['success' => true]);
     }
+
+    public function store(Request $request, Todo $todo){
+        $input = $request['task'];
+        $input['creater_id'] = auth()->id();
+        $todo->fill($input)->save();
+
+        return redirect()->route('mytasks');
+    }
     
 }
-
