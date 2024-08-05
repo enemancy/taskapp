@@ -16,13 +16,13 @@
                         <div class="flex items-center justify-between">
                             <div class="flex items-center space-x-4">
                                 <input type="checkbox" 
-                                        id="todo-{{ $todo->id }}" 
+                                        id="{{ $todo->id }}" 
                                         class="todo-checkbox w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500" 
                                         {{ $todo->completed ? 'checked' : '' }}>
                                 
                                 <div class="ml-4">
-                                    <h3 class="text-xl font-semibold text-gray-800">{{ $todo->name }}</h3>
-                                    <p class="{{ $todo->deadline && strtotime($todo->deadline) < strtotime('today') ? 'text-red-600' : 'text-gray-600' }} text-sm mt-1">
+                                    <h3 class="text-xl font-semibold text-gray-800 {{ $todo->completed ? 'line-through' : '' }}">{{ $todo->name }}</h3>
+                                    <p class="{{ $todo->deadline && strtotime($todo->deadline) < strtotime('today') ? 'text-red-600' : 'text-gray-600' }} text-sm mt-1 {{ $todo->completed ? 'line-through' : '' }}">
                                         締め切り: {{ $todo->deadline ? date('Y年m月d日', strtotime($todo->deadline)) : 'なし' }}
                                     </p>
                                 </div>
@@ -40,7 +40,7 @@
             const checkboxes = document.querySelectorAll('.todo-checkbox');
             checkboxes.forEach(checkbox => {
                 checkbox.addEventListener('change', function() {
-                    updateTodoStatus(this.dataset.id, this.checked);
+                    updateTodoStatus(this.id, this.checked);
                 });
             });
         });
@@ -63,6 +63,7 @@
                     console.error('Todoの更新に失敗しました');
                 }
             })
+            .then(location.reload())
             .catch(error => console.error('エラー:', error));
         }
     </script>

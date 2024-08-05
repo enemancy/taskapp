@@ -11,7 +11,8 @@ class TaskController extends Controller
         return view('mytasks', ['todos' => $todo->getCurrentUserTodos()]);
     } 
 
-    public function updateStatus(Todo $todo){
+    public function updateStatus(Request $request, $id, Todo $todo){
+        $todo = Todo::findOrFail($id);
         $completed = request()->input('completed');
         $todo->update(['completed' => $completed]);
 
