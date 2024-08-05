@@ -10,6 +10,8 @@ class Todo extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name', 'deadline', 'creater_id'];
+
     public static function getCurrentUserTodos(){
         return Todo::where('creater_id', Auth::user()->id)->get();
     }

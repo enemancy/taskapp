@@ -7,27 +7,31 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div>
-                    @foreach ($todos as $todo)
-                        <div class="border-b border-gray-200 p-4">
-                            <div class="flex items-center">
+            <a href="{{ route('maketask') }}" class="inline-flex items-center mb-4 px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xm text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                新規作成
+            </a>
+            <div class="bg-white overflow-hidden shadow-lg rounded-lg">
+                @foreach ($todos as $todo)
+                    <div class="border-b border-gray-200 p-6 hover:bg-gray-50 transition duration-150 ease-in-out">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
                                 <input type="checkbox" 
-                                       id="todo-{{ $todo->id }}" 
-                                       class="todo-checkbox mr-3" 
-                                       {{ $todo->completed ? 'checked' : '' }}>
+                                        id="todo-{{ $todo->id }}" 
+                                        class="todo-checkbox w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500" 
+                                        {{ $todo->completed ? 'checked' : '' }}>
                                 
-                                <div class="ml-3">
-                                    <h3 class="text-lg font-semibold mb-1">{{ $todo->name }}</h3>
-                                    <p class="{{ $todo->deadline && strtotime($todo->deadline) < strtotime('today') ? 'text-red-500' : 'text-gray-600' }} text-sm">
-                                        締め切り: {{ $todo->deadline ? date('Y/m/d', strtotime($todo->deadline)) : 'なし' }}
+                                <div class="ml-4">
+                                    <h3 class="text-xl font-semibold text-gray-800">{{ $todo->name }}</h3>
+                                    <p class="{{ $todo->deadline && strtotime($todo->deadline) < strtotime('today') ? 'text-red-600' : 'text-gray-600' }} text-sm mt-1">
+                                        締め切り: {{ $todo->deadline ? date('Y年m月d日', strtotime($todo->deadline)) : 'なし' }}
                                     </p>
                                 </div>
                             </div>
                         </div>
-                    @endforeach
-                </div>
+                    </div>
+                @endforeach
             </div>
+        </div>
         </div>
     </div>
 
