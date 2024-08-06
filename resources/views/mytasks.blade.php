@@ -26,6 +26,7 @@
                                         締め切り: {{ $todo->deadline ? date('Y年m月d日', strtotime($todo->deadline)) : 'なし' }}
                                     </p>
                                 </div>
+                                <i class="fa-solid fa-pen"></i>
                             </div>
                         </div>
                     </div>
