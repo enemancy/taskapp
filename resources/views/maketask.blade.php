@@ -7,7 +7,7 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
-            <form action="/tasks" method="POST" class="space-y-4">
+            <form action="/tasks/store" method="POST" class="space-y-4">
                 @csrf
                 <div>
                     <label for="name" class="block text-sm font-medium text-gray-700">タスク名</label>
