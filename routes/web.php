@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\TeamController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,21 +18,24 @@ use App\Http\Controllers\TaskController;
 
 
 //MyTasks
-Route::get('/mytasks', [TaskController::class, 'mytasks'])->name('mytasks');
+Route::get('/mytasks', [TaskController::class, 'mytasks'])->name('myTasks');
 Route::post('/todos/{id}/update-status', [TaskController::class, 'updateStatus'])->name('todos.updateStatus');
 
 //MakeTask
 Route::get('/maketask', function () {
     return view('maketask');
-})->name('maketask');
+})->name('makeTask');
 Route::post('/tasks/store', [TaskController::class, 'store'])->name('tasks.store');
 
 //EditTask
-Route::get('/tasks/{id}/edit', [TaskController::class, 'edit'])->name('edittask');
+Route::get('/tasks/{id}/edit', [TaskController::class, 'edit'])->name('editTask');
 Route::post('/tasks/{id}/update', [TaskController::class, 'update'])->name('tasks.update');
 
 //DeleteTask
 Route::post('/tasks/{id}/delete', [TaskController::class, 'delete'])->name('tasks.delete');
+
+//MyTeams
+Route::get('/myteams', [TeamController::class, 'myteams'])->name('myTeams');
 
 //Default
 Route::get('/', function () {
