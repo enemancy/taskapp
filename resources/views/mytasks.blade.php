@@ -31,20 +31,17 @@
                                     </p>
                                 </div>
                             </div>
-                            <div class="flex flex-col justify-end space-y-2">
-                                <a href="{{ route('edittask', ['id' => $todo->id]) }}"
-                                    class="inline-flex items-center px-4 py-2 bg-gray-800 text-white text-m rounded hover:bg-gray-700">
-                                    編集
+                            <div class="flex justify-end space-x-2">
+                                <a href="{{ route('edittask', ['id' => $todo->id]) }}" class="text-xl">
+                                    <i class="fa-solid fa-pen"></i>
                                 </a>
                                 <form action="{{ route('tasks.delete', ['id' => $todo->id]) }}" method="POST" class="inline">
                                     @csrf
-                                    <button type="submit" class="inline-flex items-center px-4 py-2 bg-red-600 text-white text-m rounded hover:bg-red-700">
-                                        削除
+                                    <button type="submit" class="text-red-600 bg-transparent border-none cursor-pointer text-xl">
+                                        <i class="fa-solid fa-trash"></i>
                                     </button>
                                 </form>
                             </div>
-                            <!-- FontAwesome失敗 -->
-                                    <i class="fa-solid fa-pen"></i>
                         </div>
                     </div>
                 @endforeach
