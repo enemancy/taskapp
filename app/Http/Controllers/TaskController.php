@@ -26,7 +26,7 @@ class TaskController extends Controller
         $input['creater_id'] = auth()->id();
         $todo->fill($input)->save();
 
-        return redirect()->route('mytasks');
+        return redirect()->route('myTasks');
     }
 
     //EditTask
@@ -39,7 +39,7 @@ class TaskController extends Controller
         $input = $request['task'];
         $todo->update($input);
 
-        return redirect()->route('mytasks');
+        return redirect()->route('myTasks');
     }
 
     //DeleteTask
@@ -47,7 +47,7 @@ class TaskController extends Controller
         $todo = Todo::findOrFail($id);
         $todo->delete();
 
-        return redirect()->route('mytasks');
+        return redirect()->route('myTasks');
     }
     
 }
