@@ -34,8 +34,13 @@ Route::post('/tasks/{id}/update', [TaskController::class, 'update'])->name('task
 //DeleteTask
 Route::post('/tasks/{id}/delete', [TaskController::class, 'delete'])->name('tasks.delete');
 
+
 //MyTeams
 Route::get('/myteams', [TeamController::class, 'myteams'])->name('myTeams');
+
+//MakeTeam
+Route::get('maketeam', [TeamController::class, 'maketeam'])->name('makeTeam');
+Route::post('teams/store', [TeamController::class, 'store'])->name('teams.store');
 
 //Default
 Route::get('/', function () {

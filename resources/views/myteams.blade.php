@@ -7,7 +7,7 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <a href=""
+            <a href="{{ route('makeTeam') }}"
                 class="inline-flex items-center mb-4 px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xm text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
                 新規作成
             </a>
@@ -24,6 +24,13 @@
                                     <p
                                         class="{{ $team->auth_id == Auth::user()->id ? 'font-bold' : '' }} text-gray-600 text-sm mt-1 ">
                                         所有者: {{ $team->author->name }}
+                                    </p>
+                                    <p
+                                        class="text-gray-600 text-sm mt-1 ">
+                                        メンバー:
+                                        @foreach ($team->user as $user)
+                                            {{ $user->name }}
+                                        @endforeach
                                     </p>
                                 </div>
                             </div>
