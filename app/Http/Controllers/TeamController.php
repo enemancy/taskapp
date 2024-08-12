@@ -19,7 +19,7 @@ class TeamController extends Controller
     
     public function maketeam(){
         $currentUser = Auth::user();
-        $users = User::where('id', '!=', $currentUser->id)->get();
+        $users = User::getUsersExceptCurrent();
         return view('maketeam', ['users' => $users]);
     }
 
@@ -31,5 +31,24 @@ class TeamController extends Controller
         $team->user()->attach(Auth::user()->id);
 
         return redirect()->route('myTeams');
+    }
+
+    public function edit($id, Team $team){
+        $team = Team::find($id);
+        $users = User::getUsersExceptCurrent();
+        $members = $team->user;
+        
+        return view('editteam', ['team' => $team, 'users' => $users, 'members' => $members]);
+    }
+
+    public function update(Request $request, $id){
+        $teamData=$request['team'];
+        $team = Team::find($id);
+        $team->fill($teamData)->save();
+        $team->user()->sync($request['userIds']);
+        $team->user()->attach(Auth::user()->id);
+
+        return redirect()->route('myTeams');
+
     }
 } 

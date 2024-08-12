@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Auth;
+
 
 class User extends Authenticatable
 {
@@ -14,6 +16,11 @@ class User extends Authenticatable
 
     public function teams(){
         return $this->belongsToMany(Team::class, 'users-teams', 'user_id', 'team_id')->using(UserTeam::class);
+    }
+
+    public static function getUsersExceptCurrent()
+    {
+        return self::where('id', '!=', Auth::user()->id)->get();
     }
     
     /**
