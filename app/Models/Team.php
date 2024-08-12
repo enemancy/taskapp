@@ -9,6 +9,8 @@ class Team extends Model
 {
     use HasFactory;
 
+    protected $fillable=['name', 'auth_id'];
+
     public function user(){
         return $this->belongsToMany(User::class, 'users-teams', 'team_id', 'user_id')->using(UserTeam::class);
     }
