@@ -35,7 +35,7 @@
                                 </div>
                             </div>
                             <div class="flex justify-end space-x-2 {{ $team->auth_id == Auth::user()->id ? '' : 'hidden' }}">
-                                <a href="" class="text-xl">
+                                <a href="{{ route('editTeam', $team->id) }}" class="text-xl">
                                     <i class="fa-solid fa-pen"></i>
                                 </a>
                                 <form action="" method="POST" class="inline">
