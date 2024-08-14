@@ -20,8 +20,8 @@
                     @if (Route::has('login'))
                         <div class="space-x-4">
                             @auth
-                                <a href="{{ url('/dashboard') }}" class="bg-white text-gray-800 hover:bg-gray-100 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
-                                    <i class="fas fa-tachometer-alt mr-2"></i>ダッシュボード
+                                <a href="{{ route('myTasks') }}" class="bg-white text-gray-800 hover:bg-gray-100 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
+                                    <i class="fas fa-list mr-2"></i>マイタスク
                                 </a>
                             @else
                                 <a href="{{ route('login') }}" class="bg-white text-gray-800 hover:bg-gray-100 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
