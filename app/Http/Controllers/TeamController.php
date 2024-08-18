@@ -45,7 +45,6 @@ class TeamController extends Controller
         $team = Team::find($id);
         $team->fill($teamData)->save();
         $team->user()->sync($request['userIds']);
-        $team->user()->attach(Auth::user()->id);
 
         return redirect()->route('myTeams');
 
