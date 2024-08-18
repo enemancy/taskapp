@@ -50,6 +50,9 @@ Route::post('teams/store', [TeamController::class, 'store'])->name('teams.store'
 Route::get('/teams/{id}/edit', [TeamController::class, 'edit'])->name('editTeam');
 Route::post('/teams/{id}/update', [TeamController::class, 'update'])->name('teams.update');
 
+//DeleteTeam
+Route::post('/teams/{id}/delete', [TeamController::class, 'delete'])->name('teams.delete');
+
 //Default
 Route::get('/', function () {
     return view('welcome');

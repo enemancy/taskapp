@@ -50,4 +50,12 @@ class TeamController extends Controller
         return redirect()->route('myTeams');
 
     }
+
+    public function delete($id){
+        $team = Team::findOrFail($id);
+        $team->user()->detach();
+        $team->delete();
+
+        return redirect()->route('myTeams');
+    }
 } 
