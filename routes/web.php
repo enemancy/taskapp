@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TeamController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,9 @@ Route::post('/tasks/{id}/update', [TaskController::class, 'update'])->name('task
 Route::post('/tasks/{id}/delete', [TaskController::class, 'delete'])->name('tasks.delete');
 
 
+// TeamSerch
+Route::get('/users/{email}/search', [UserController::class, 'searchFromEmail'])->name('users.searchFromEmail');
+
 //MyTeams
 Route::get('/myteams', [TeamController::class, 'myteams'])->name('myTeams');
 
@@ -59,6 +63,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+Route::get('/test', function(){
+    return view('test');
 });
 
 require __DIR__.'/auth.php';

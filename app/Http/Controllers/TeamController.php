@@ -28,7 +28,6 @@ class TeamController extends Controller
         $teamData['auth_id']=Auth::user()->id;
         $team=Team::create($teamData);
         $team->user()->attach($request['userIds']);
-        $team->user()->attach(Auth::user()->id);
 
         return redirect()->route('myTeams');
     }
