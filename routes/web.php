@@ -53,6 +53,12 @@ Route::post('/teams/{id}/update', [TeamController::class, 'update'])->name('team
 //DeleteTeam
 Route::post('/teams/{id}/delete', [TeamController::class, 'delete'])->name('teams.delete');
 
+
+//UserSuggest
+Route::get('/users/suggest/{query}', [UserController::class, 'suggest'])->name('users.suggest');
+
+
+
 //Default
 Route::get('/', function () {
     return view('welcome');

@@ -20,10 +20,9 @@
                 <div class="mt-6">
                     <label for="member" class="block text-sm font-medium text-gray-700">メンバー</label>
                     <div class="flex items-center space-x-2">
-                        <input type="text" name="" id="member" 
-                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                        <input type="button" value="追加" onclick="addMember()" 
-                            class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                        <input type="text" id="autoComplete" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                        <!-- <input type="button" value="追加" onclick="addMember()" 
+                            class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150"> -->
                     </div>
                     <ul id="memberList" class="mt-2 space-y-2">
                         <!-- メンバーリストがここに追加されます -->
@@ -46,11 +45,52 @@
     </div>
 
     <script>
-        function addMember(){
-            const memberInputEl = document.getElementById('member');
-            const memberInput = memberInputEl.value;
+        const autoCompleteJS = new autoComplete({
+            placeHolder: 'Search for User...',
+            data: {
+                // src: ['aaa', 'bbb', 'ccc','AAA'],
+                src: async (query) => {
+                    try {
+                        const source = await fetch(`/users/suggest/${query}`); 
+                        const data = await source.json();
 
-            fetch(`/users/${memberInput}/search`, {
+                        return data;
+                    } catch (err) {
+                        return error;
+                    }
+                },
+                keys: ['suggest'],
+            },
+            debounce: 300,
+            resultsList: {
+                element: (list, data) => {
+                    if (!data.results.length) {
+                        const message = document.createElement("div");
+                        message.setAttribute("class", "no_result");
+                        message.innerHTML = `<span>Found No Results for "${data.query}"</span>`;
+                        list.prepend(message);
+                    }
+                },
+                class: "z-50",
+                noResults: true,
+                maxResults: 5,
+            },
+            resultItem: {
+                highlight: true,
+            }
+        });
+
+
+        // リスト選択時に起動
+        document.querySelector("#autoComplete").addEventListener("selection", function (event) {
+            // "event.detail" carries the autoComplete.js "feedback" object
+            addMember(event.detail.selection.value.email);
+        });
+
+
+        function addMember(email){
+
+            fetch(`/users/${email}/search`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -60,7 +100,7 @@
             .then(response => response.json())
             .then(data => {
                 updateMemberList(data);
-                clearMemberInput(memberInputEl);
+                autoCompleteJS.input.value = '';
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -81,7 +121,7 @@
                 return;
             }
 
-            if(carrentUserIds.includes(String(data.id))){
+            if(carrentUserIds.includes(String(data.id)) || data.id === {{ Auth::user()->id }}){
                 alert('このユーザーは既に追加されています。');
                 return;
             }
@@ -104,10 +144,6 @@
             li.appendChild(input);
             li.appendChild(removeButton);
             targetUl.appendChild(li);
-        }
-
-        function clearMemberInput(el){
-            el.value = '';
         }
             
     </script>
