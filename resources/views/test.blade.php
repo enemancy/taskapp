@@ -6,11 +6,6 @@
     </x-slot>
 
     <!DOCTYPE html>
-<!-- <html lang="en">
-
-<head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.7/dist/css/autoComplete.min.css">
-</head> -->
 
 <!-- <body> -->
     <div class="autoComplete_wrapper">

@@ -17,6 +17,10 @@ use App\Http\Controllers\UserController;
 |
 */
 
+use App\Http\Controllers\Auth\LoginController;
+
+Route::get('login/google', [LoginController::class, 'redirectToGoogle'])->name('login.google');
+Route::get('login/google/callback', [LoginController::class, 'handleGoogleCallback']);
 
 //MyTasks
 Route::get('/mytasks', [TaskController::class, 'mytasks'])->name('myTasks');

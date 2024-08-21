@@ -5,6 +5,10 @@
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
+        <a href="{{ route('login.google') }}" class="btn btn-google">
+            Login with Google
+        </a>
+
         <!-- Email Address -->
         <div>
             <x-input-label for="email" :value="__('Email')" />
