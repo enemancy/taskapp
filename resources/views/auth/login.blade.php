@@ -9,7 +9,7 @@
             <div class="flex flex-col justify-center items-center">
                 <span class="text-2xl font-bold">Social Login</span>
                 <div class="flex flex-col justify-center items-center">
-                    <button class="gsi-material-button">
+                    <a href="{{ route('login.google') }}" class="gsi-material-button">
                         <div class="gsi-material-button-state"></div>
                             <div class="gsi-material-button-content-wrapper">
                                 <div class="gsi-material-button-icon">
@@ -24,7 +24,7 @@
                                 <span class="gsi-material-button-contents">Sign in with Google</span>
                                 <span style="display: none;">Sign in with Google</span>
                         </div>
-                    </button>    
+                    </a>    
                 </div>
             </div>    
         </div>
