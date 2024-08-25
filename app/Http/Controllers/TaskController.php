@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Todo;
+use App\Models\Team;
 
 class TaskController extends Controller
 {
@@ -21,6 +22,12 @@ class TaskController extends Controller
     }
 
     //MakeTask
+    public function maketask(){
+        $teams = Team::getCurrentUserTeams();
+
+        return view('maketask', ['teams' => $teams]);
+    }
+    
     public function store(Request $request, Todo $todo){
         $input = $request['task'];
         $input['creater_id'] = auth()->id();
@@ -31,7 +38,9 @@ class TaskController extends Controller
 
     //EditTask
     public function edit($id){
-        return view('edittask', ['task' => Todo::findOrFail($id)]);
+        $task = Todo::findOrFail($id);
+        $teams = Team::getCurrentUserTeams();
+        return view('edittask', ['task' => $task, 'teams' => $teams]);
     }
 
     public function update(Request $request, $id){

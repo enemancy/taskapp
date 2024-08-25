@@ -5,6 +5,6 @@
         </h2>
     </x-slot>
 
-    <x-task-form :routeName="$routeName" />
+    <x-task-form :routeName="$routeName" :teams="$teams"/>
 
 </x-app-layout>

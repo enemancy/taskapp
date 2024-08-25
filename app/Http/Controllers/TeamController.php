@@ -5,20 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Team;
 use App\Models\User;
-use App\Models\UserTeam;
 use Illuminate\Support\Facades\Auth;
 
 class TeamController extends Controller
-{
+{   
     public function myteams(){
-        $user = Auth::user();
-        $teams = $user->teams;
+        $teams = Team::getCurrentUserTeams();
 
         return view('myteams', ['teams' => $teams]);
     }
     
     public function maketeam(){
-        $currentUser = Auth::user();
         $users = User::getUsersExceptCurrent();
         return view('maketeam', ['users' => $users]);
     }
