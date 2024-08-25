@@ -28,7 +28,6 @@ class TeamController extends Controller
         $teamData['auth_id']=Auth::user()->id;
         $team=Team::create($teamData);
         $team->user()->attach($request['userIds']);
-        $team->user()->attach(Auth::user()->id);
 
         return redirect()->route('myTeams');
     }
@@ -46,9 +45,16 @@ class TeamController extends Controller
         $team = Team::find($id);
         $team->fill($teamData)->save();
         $team->user()->sync($request['userIds']);
-        $team->user()->attach(Auth::user()->id);
 
         return redirect()->route('myTeams');
 
+    }
+
+    public function delete($id){
+        $team = Team::findOrFail($id);
+        $team->user()->detach();
+        $team->delete();
+
+        return redirect()->route('myTeams');
     }
 } 

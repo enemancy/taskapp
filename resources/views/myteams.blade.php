@@ -38,7 +38,7 @@
                                 <a href="{{ route('editTeam', $team->id) }}" class="text-xl">
                                     <i class="fa-solid fa-pen"></i>
                                 </a>
-                                <form action="" method="POST" class="inline">
+                                <form action="{{ route('teams.delete', $team->id) }}" method="POST" class="inline">
                                     @csrf
                                     <button type="submit" class="text-red-600 bg-transparent border-none cursor-pointer text-xl">
                                         <i class="fa-solid fa-trash"></i>
