@@ -25,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
         View::composer('*', function ($view){
             $routeName = Route::currentRouteName();
             $pageName = Str::studly($routeName);
-            $view->with('pageName', $pageName);
+            $view->with('pageName', $pageName)->with('routeName', $routeName);
         });
     }
 }
