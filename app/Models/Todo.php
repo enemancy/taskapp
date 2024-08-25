@@ -12,8 +12,11 @@ class Todo extends Model
     use HasFactory;
     // use SoftDeletes;
 
-    protected $fillable = ['name', 'deadline', 'creater_id', 'completed'];
+    protected $fillable = ['name', 'deadline', 'team_id', 'creater_id', 'completed'];
 
+    public function team(){
+        return $this->belongsTo(Team::class, 'team_id');
+    }
     public static function getCurrentUserTodos(){
         return Todo::where('creater_id', Auth::user()->id)
             ->orderBy('completed')

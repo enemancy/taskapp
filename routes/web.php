@@ -27,9 +27,7 @@ Route::get('/mytasks', [TaskController::class, 'mytasks'])->name('myTasks');
 Route::post('/todos/{id}/update-status', [TaskController::class, 'updateStatus'])->name('todos.updateStatus');
 
 //MakeTask
-Route::get('/maketask', function () {
-    return view('maketask');
-})->name('makeTask');
+Route::get('/maketask', [TaskController::class, 'maketask'])->name('makeTask');
 Route::post('/tasks/store', [TaskController::class, 'store'])->name('tasks.store');
 
 //EditTask

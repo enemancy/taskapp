@@ -29,6 +29,9 @@
                                         class="{{ $todo->deadline && strtotime($todo->deadline) < strtotime('today') ? 'text-red-600' : 'text-gray-600' }} text-sm mt-1 {{ $todo->completed ? 'line-through' : '' }}">
                                         締め切り: {{ $todo->deadline ? date('Y年m月d日', strtotime($todo->deadline)) : 'なし' }}
                                     </p>
+                                    <p class="text-gray-600 text-sm mt-1 {{ $todo->completed ? 'line-through' : '' }}">
+                                        チーム名：{{ isset($todo->team) ? $todo->team->name : 'なし' }}
+                                    </p>
                                 </div>
                             </div>
                             <div class="flex justify-end space-x-2">
